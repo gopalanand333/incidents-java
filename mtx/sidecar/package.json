@@ -1,0 +1,32 @@
+{
+  "name": "incident-management-mtx",
+  "dependencies": {
+    "@cap-js/hana": "^1",
+    "@sap/cds": "^8",
+    "@sap/cds-mtxs": "^2",
+    "@sap/xssec": "^4",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "build": "cds build ../.. --for mtx-sidecar --production && npm i --prefix gen"
+  },
+  "cds": {
+    "profiles": [
+      "mtx-sidecar",
+      "java"
+    ],
+    "requires": {
+      "html5-host": {
+    "vcap": {
+       "label": "html5-apps-repo",  
+       "plan": "app-host"
+    },
+    "subscriptionDependency": { "uaa": "xsappname" }
+  }
+    }
+  }
+}

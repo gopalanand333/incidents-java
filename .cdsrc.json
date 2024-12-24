@@ -1,0 +1,18 @@
+{
+    "sql": {
+        "native_hana_associations": false
+    },
+    "requires": {
+        "[production]": {
+            "auth": "xsuaa",
+            "db": "hana",
+            "multitenancy": true
+        },
+        "destinations": true,
+        "html5-repo": true
+    },
+    "profiles": [
+        "with-mtx-sidecar",
+        "java"
+    ]
+}
