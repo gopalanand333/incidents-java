@@ -11,7 +11,7 @@ import com.sap.cds.services.handler.annotations.On;
 import com.sap.cds.services.handler.annotations.ServiceName;
 import com.sap.cds.services.mt.DependenciesEventContext;
 import com.sap.cds.services.mt.DeploymentService;
-import com.sap.cds.services.mt.;
+import com.sap.cds.services.mt.SaasRegistryDependency;
 @Component
 @Profile("cloud")
 @ServiceName(DeploymentService.DEFAULT_NAME)
@@ -23,7 +23,7 @@ public class SubscriptionHandler implements EventHandler {
     @On
     public void onDependencies(DependenciesEventContext context) {
         List<Map<String, Object>> dependencies = new ArrayList<>();
-//        dependencies.add(SaasRegistryDependency.create(html5AppsRepoXsappname));
+        dependencies.add(SaasRegistryDependency.create(html5AppsRepoXsappname));
         context.setResult(dependencies);
     }
 
