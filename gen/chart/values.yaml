@@ -1,0 +1,110 @@
+# yaml-language-server: $schema=./values.schema.json
+
+global:
+  domain: eaafdf0.stage.kyma.ondemand.com
+  imagePullSecret:
+    name: docker-registry
+  image:
+    registry: gopalanand
+    tag: java1
+srv:
+  bindings:
+    html5-apps-repo-host:
+      serviceInstanceName: html5-apps-repo-host
+    auth:
+      serviceInstanceName: xsuaa
+    saas-registry:
+      serviceInstanceName: saas-registry
+    service-manager:
+      serviceInstanceName: service-manager
+  image:
+    repository: incident-management-srv
+    tag: java4
+  env:
+    SPRING_PROFILES_ACTIVE: cloud
+    CDS_MULTITENANCY_APPUI_TENANTSEPARATOR: "-"
+    CDS_MULTITENANCY_APPUI_URL: https://{{ .Release.Name }}-srv-{{ .Release.Namespace }}.{{ .Values.global.domain }}
+    CDS_MULTITENANCY_SIDECAR_URL: https://{{ .Release.Name }}-sidecar-{{ .Release.Namespace }}.{{ .Values.global.domain }}
+  resources:
+    limits:
+      ephemeral-storage: 1G
+      memory: 1G
+    requests:
+      ephemeral-storage: 1G
+      cpu: 1000m
+      memory: 1G
+  health:
+    liveness:
+      path: /actuator/health/liveness
+    readiness:
+      path: /actuator/health/readiness
+sidecar:
+  bindings:
+    auth:
+      serviceInstanceName: xsuaa
+    service-manager:
+      serviceInstanceName: service-manager
+  image:
+    repository: incident-management-sidecar
+  resources:
+    limits:
+      ephemeral-storage: 1G
+      memory: 500M
+    requests:
+      ephemeral-storage: 1G
+      cpu: 500m
+      memory: 500M
+  health:
+    liveness:
+      path: /health
+    readiness:
+      path: /health
+xsuaa:
+  serviceOfferingName: xsuaa
+  servicePlanName: application
+  parameters:
+    tenant-mode: shared
+    xsappname: incident-management-{{ .Release.Namespace }}
+html5-apps-repo-host:
+  serviceOfferingName: html5-apps-repo
+  servicePlanName: app-host
+html5-apps-deployer:
+  env:
+    ASYNC_UPLOAD: "true"
+    destinations: '[{"forwardAuthToken":true,"name":"srv-api","url":"https://ga-srv-java.eaafdf0.stage.kyma.ondemand.com"}]'
+  image:
+    repository: "incident-management-html5-deployer"
+  bindings:
+    xsuaa:
+      serviceInstanceName: xsuaa
+    html5-apps-repo:
+      serviceInstanceName: html5-apps-repo-host
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 1G
+    requests:
+      cpu: 1000m
+      memory: 1G
+service-manager:
+  serviceOfferingName: service-manager
+  servicePlanName: container
+saas-registry:
+  serviceOfferingName: saas-registry
+  servicePlanName: application
+  parameters:
+    displayName: incident-management
+    description: A simple CAP project.
+    category: "CAP JAVA Application"
+    appUrls:
+      onSubscriptionAsync: true
+      onUnSubscriptionAsync: true
+      onUpdateDependenciesAsync: true
+      callbackTimeoutMillis: 300000
+      getDependencies: https://{{ .Release.Name }}-srv-{{ .Release.Namespace }}.{{ .Values.global.domain }}/mt/v1.0/subscriptions/dependencies
+      onSubscription: https://{{ .Release.Name }}-srv-{{ .Release.Namespace }}.{{ .Values.global.domain }}/mt/v1.0/subscriptions/tenants/{tenantId}
+    xsappname: incident-management-{{ .Release.Namespace }}
+    appName: incident-management-{{ .Release.Namespace }}
+html5-apps-repo-runtime:
+  serviceOfferingName: html5-apps-repo
+  servicePlanName: app-runtime

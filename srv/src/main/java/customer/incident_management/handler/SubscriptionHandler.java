@@ -17,7 +17,7 @@ import com.sap.cds.services.mt.SaasRegistryDependency;
 @ServiceName(DeploymentService.DEFAULT_NAME)
 public class SubscriptionHandler implements EventHandler {
 
-    @Value("${vcap.services.incident-management-html5-repo-runtime.credentials.uaa.xsappname}")
+    @Value("${vcap.services.ga-html5-apps-repo-host.credentials.uaa.xsappname}")
     private String html5AppsRepoXsappname;
 
     @On
