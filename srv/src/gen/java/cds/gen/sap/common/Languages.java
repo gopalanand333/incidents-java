@@ -10,10 +10,15 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.processing.Generated;
 
+/**
+ * Code list for languages
+ *
+ * See https://cap.cloud.sap/docs/cds/common#entity-languages
+ */
 @CdsName("sap.common.Languages")
 @Generated(
     value = "cds-maven-plugin",
-    date = "2024-12-31T10:48:06.363936Z",
+    date = "2025-01-06T10:39:40.681936Z",
     comments = "com.sap.cds:cds-maven-plugin:3.6.0 / com.sap.cds:cds4j-api:3.6.1"
 )
 public interface Languages extends CdsData {
@@ -35,8 +40,14 @@ public interface Languages extends CdsData {
 
   void setDescr(String descr);
 
+  /**
+   * Type for a language code
+   */
   String getCode();
 
+  /**
+   * Type for a language code
+   */
   void setCode(String code);
 
   List<LanguagesTexts> getTexts();

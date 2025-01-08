@@ -9,7 +9,7 @@ import javax.annotation.processing.Generated;
 @CdsName("sap.common.Countries.texts")
 @Generated(
     value = "cds-maven-plugin",
-    date = "2024-12-31T10:48:06.363936Z",
+    date = "2025-01-06T10:39:40.681936Z",
     comments = "com.sap.cds:cds-maven-plugin:3.6.0 / com.sap.cds:cds4j-api:3.6.1"
 )
 public interface CountriesTexts_ extends StructuredType<CountriesTexts_> {

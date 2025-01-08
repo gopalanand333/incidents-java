@@ -10,10 +10,15 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.processing.Generated;
 
+/**
+ * Code list for countries
+ *
+ * See https://cap.cloud.sap/docs/cds/common#entity-countries
+ */
 @CdsName("sap.common.Countries")
 @Generated(
     value = "cds-maven-plugin",
-    date = "2024-12-31T10:48:06.363936Z",
+    date = "2025-01-06T10:39:40.681936Z",
     comments = "com.sap.cds:cds-maven-plugin:3.6.0 / com.sap.cds:cds4j-api:3.6.1"
 )
 public interface Countries extends CdsData {

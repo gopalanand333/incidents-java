@@ -17,11 +17,12 @@ import com.sap.cds.services.mt.SaasRegistryDependency;
 @ServiceName(DeploymentService.DEFAULT_NAME)
 public class SubscriptionHandler implements EventHandler {
 
-    @Value("${vcap.services.ga-html5-apps-repo-host.credentials.uaa.xsappname}")
+    @Value("${vcap.services.html5-apps-repo-host.credentials.uaa.xsappname}")
     private String html5AppsRepoXsappname;
 
     @On
     public void onDependencies(DependenciesEventContext context) {
+
         List<Map<String, Object>> dependencies = new ArrayList<>();
         dependencies.add(SaasRegistryDependency.create(html5AppsRepoXsappname));
         context.setResult(dependencies);

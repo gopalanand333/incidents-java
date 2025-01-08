@@ -19,7 +19,7 @@ srv:
       serviceInstanceName: service-manager
   image:
     repository: incident-management-srv
-    tag: java4
+    tag: java6
   env:
     SPRING_PROFILES_ACTIVE: cloud
     CDS_MULTITENANCY_APPUI_TENANTSEPARATOR: "-"

@@ -8,10 +8,15 @@ import java.lang.String;
 import java.util.function.Function;
 import javax.annotation.processing.Generated;
 
+/**
+ * Code list for time zones
+ *
+ * See https://cap.cloud.sap/docs/cds/common#entity-timezones
+ */
 @CdsName("sap.common.Timezones")
 @Generated(
     value = "cds-maven-plugin",
-    date = "2024-12-31T10:48:06.363936Z",
+    date = "2025-01-06T10:39:40.681936Z",
     comments = "com.sap.cds:cds-maven-plugin:3.6.0 / com.sap.cds:cds4j-api:3.6.1"
 )
 public interface Timezones_ extends StructuredType<Timezones_> {
