@@ -41,6 +41,7 @@ modules:
           CDS_MULTITENANCY_SIDECAR_URL: ~{mtx-url}
       - name: incident-management-registry
       - name: incident-management-db
+      - name: incident-management-html5-repo-host
 
   - name: incident-management-app-deployer
     type: com.sap.application.content
@@ -130,7 +131,7 @@ modules:
     requires:
       - name: incident-management-db
       - name: incident-management-auth
-      - name: incidents_html_repo_runtime
+      - name: incident-management-html5-repo-host
 
 resources:
   - name: incident-management-destination
